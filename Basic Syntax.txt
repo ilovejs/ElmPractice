@@ -1,0 +1,18 @@
+Basic 
+	http://elm-lang.org/docs/syntax
+
+Html + Js Integration
+	https://github.com/evancz/elm-html-and-js
+
+More example
+	https://gist.github.com/evancz/8521339
+
+Elm Architecture + example
+	https://github.com/evancz/elm-architecture-tutorial/
+
+From js developer
+	http://elm-lang.org/docs/from-javascript
+
+Language reference
+	http://package.elm-lang.org/packages/elm-lang/core/2.1.0/Graphics-Element#Element
+
