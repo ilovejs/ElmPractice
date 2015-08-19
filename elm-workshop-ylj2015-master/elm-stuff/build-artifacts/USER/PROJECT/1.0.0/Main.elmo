@@ -1,0 +1,144 @@
+Elm.Main = Elm.Main || {};
+Elm.Main.make = function (_elm) {
+   "use strict";
+   _elm.Main = _elm.Main || {};
+   if (_elm.Main.values)
+   return _elm.Main.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   $moduleName = "Main",
+   $Basics = Elm.Basics.make(_elm),
+   $Color = Elm.Color.make(_elm),
+   $Graphics$Element = Elm.Graphics.Element.make(_elm),
+   $Keyboard = Elm.Keyboard.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $Time = Elm.Time.make(_elm);
+   var dirToInt = function (dir) {
+      return function () {
+         switch (dir.ctor)
+         {case "Down": return -1;
+            case "Stopped": return 0;
+            case "Up": return 1;}
+         _U.badCase($moduleName,
+         "between lines 96 and 99");
+      }();
+   };
+   var delta = A2($Signal._op["<~"],
+   $Time.inSeconds,
+   $Time.fps(35));
+   var Input = F3(function (a,
+   b,
+   c) {
+      return {_: {}
+             ,delta: c
+             ,paddle1: a
+             ,paddle2: b};
+   });
+   var Down = {ctor: "Down"};
+   var Stopped = {ctor: "Stopped"};
+   var Up = {ctor: "Up"};
+   var intToDir = function (x) {
+      return _U.eq(x,
+      1) ? Up : _U.eq(x,
+      -1) ? Down : Stopped;
+   };
+   var input = $Signal.sampleOn(delta)(A2($Signal._op["~"],
+   A2($Signal._op["~"],
+   A2($Signal._op["<~"],
+   Input,
+   A2($Signal.map,
+   function ($) {
+      return intToDir(function (_) {
+         return _.y;
+      }($));
+   },
+   $Keyboard.wasd)),
+   A2($Signal.map,
+   function ($) {
+      return intToDir(function (_) {
+         return _.y;
+      }($));
+   },
+   $Keyboard.arrows)),
+   delta));
+   var textGreen = A3($Color.rgb,
+   160,
+   200,
+   160);
+   var pongGreen = A3($Color.rgb,
+   60,
+   100,
+   60);
+   var $ = {ctor: "_Tuple2"
+           ,_0: 300
+           ,_1: 200},
+   halfWidth = $._0,
+   halfHeight = $._1;
+   var $ = {ctor: "_Tuple2"
+           ,_0: 600
+           ,_1: 400},
+   gameWidth = $._0,
+   gameHeight = $._1;
+   var Game = F3(function (a,b,c) {
+      return {_: {}
+             ,ball: c
+             ,player1: a
+             ,player2: b};
+   });
+   var defaultBall = {_: {}
+                     ,vx: 200
+                     ,vy: 200
+                     ,x: 0
+                     ,y: 0};
+   var player = function (x) {
+      return {_: {}
+             ,vx: 0
+             ,vy: 0
+             ,x: x
+             ,y: 0};
+   };
+   var defaultGame = {_: {}
+                     ,ball: defaultBall
+                     ,player1: player(20 - halfWidth)
+                     ,player2: player(halfWidth - 20)};
+   var main = $Graphics$Element.show(defaultGame);
+   var Object = F5(function (a,
+   b,
+   c,
+   d,
+   e) {
+      return _U.insert("vy",
+      d,
+      _U.insert("vx",
+      c,
+      _U.insert("y",
+      b,
+      _U.insert("x",a,e))));
+   });
+   var H = {ctor: "H"};
+   _elm.Main.values = {_op: _op
+                      ,H: H
+                      ,Object: Object
+                      ,player: player
+                      ,defaultBall: defaultBall
+                      ,Game: Game
+                      ,defaultGame: defaultGame
+                      ,main: main
+                      ,gameHeight: gameHeight
+                      ,gameWidth: gameWidth
+                      ,halfHeight: halfHeight
+                      ,halfWidth: halfWidth
+                      ,pongGreen: pongGreen
+                      ,textGreen: textGreen
+                      ,Up: Up
+                      ,Stopped: Stopped
+                      ,Down: Down
+                      ,Input: Input
+                      ,delta: delta
+                      ,dirToInt: dirToInt
+                      ,intToDir: intToDir
+                      ,input: input};
+   return _elm.Main.values;
+};

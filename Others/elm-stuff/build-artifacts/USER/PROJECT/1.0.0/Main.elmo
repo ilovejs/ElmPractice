@@ -1,0 +1,38 @@
+Elm.Main = Elm.Main || {};
+Elm.Main.make = function (_elm) {
+   "use strict";
+   _elm.Main = _elm.Main || {};
+   if (_elm.Main.values)
+   return _elm.Main.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   $moduleName = "Main",
+   $Basics = Elm.Basics.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var sum = function (xs) {
+      return function () {
+         switch (xs.ctor)
+         {case "Empty": return 0;
+            case "Node":
+            return xs._0 + sum(xs._1);}
+         _U.badCase($moduleName,
+         "between lines 9 and 14");
+      }();
+   };
+   var Node = F2(function (a,b) {
+      return {ctor: "Node"
+             ,_0: a
+             ,_1: b};
+   });
+   var Empty = {ctor: "Empty"};
+   _elm.Main.values = {_op: _op
+                      ,Empty: Empty
+                      ,Node: Node
+                      ,sum: sum};
+   return _elm.Main.values;
+};
